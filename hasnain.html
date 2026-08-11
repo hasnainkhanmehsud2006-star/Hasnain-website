@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasnain Stories</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    font-family:Arial,sans-serif;
+    background:#101820;
+    color:#fff;
+}
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    width:100%;
+    padding:16px 6%;
+    background:#17232c;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+nav h2{font-size:24px}
+.nav-links{display:flex;gap:22px;flex-wrap:wrap}
+nav a{color:#fff;text-decoration:none}
+nav a:hover{color:#00d9ff}
+
+.hero{text-align:center;padding:55px 20px 25px}
+.hero h1{font-size:44px;margin-bottom:12px}
+.hero p{color:#ccc;font-size:18px}
+
+.clock-box{
+    width:360px;max-width:92%;margin:28px auto;
+    padding:22px;border-radius:20px;background:#182832;
+    box-shadow:0 10px 30px rgba(0,0,0,.35)
+}
+#clock{font-size:34px;font-weight:bold}
+#date{margin-top:9px;color:#bbb}
+
+#search{
+    display:block;width:90%;max-width:720px;
+    margin:20px auto 45px;padding:15px 18px;
+    border:0;outline:0;border-radius:12px;font-size:17px
+}
+
+.section{width:92%;max-width:1300px;margin:55px auto}
+.section h2{font-size:30px;margin-bottom:25px}
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px
+}
+.card{
+    padding:22px;background:#182832;border-radius:18px;
+    transition:.25s;display:flex;flex-direction:column
+}
+.card:hover{transform:translateY(-6px);background:#213744}
+.card h3{font-size:21px;margin-bottom:12px}
+.card p{color:#ccc;line-height:1.65}
+.buttons{margin-top:auto;padding-top:18px}
+button,.wiki{
+    width:100%;padding:12px;margin-top:8px;
+    border:0;border-radius:9px;cursor:pointer;
+    text-align:center;text-decoration:none;display:block;font-size:15px
+}
+button{background:#00a884;color:#fff}
+.wiki{background:#444;color:#fff}
+button:hover,.wiki:hover{opacity:.85}
+
+#storyPage{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    overflow:auto;
+    background:rgba(5,10,14,.96);
+    padding:35px 18px;
+}
+.story-window{
+    max-width:900px;
+    margin:0 auto;
+    background:#182832;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 15px 45px rgba(0,0,0,.5)
+}
+.story-window h2{font-size:34px;margin-bottom:20px}
+.story-window h3{margin:24px 0 10px;color:#00d9ff}
+.story-window p{
+    color:#ddd;
+    line-height:1.85;
+    white-space:pre-line;
+    font-size:17px
+}
+.close-btn{background:#e74c3c}
+.story-wiki{background:#444}
+
+footer{
+    margin-top:70px;padding:30px;text-align:center;
+    background:#17232c;color:#aaa
+}
+
+@media(max-width:700px){
+    nav{flex-direction:column;align-items:flex-start}
+    .nav-links{gap:15px}
+    .hero h1{font-size:34px}
+    #clock{font-size:28px}
+    .story-window h2{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <h2>📚 Hasnain Stories</h2>
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#cartoons">Cartoons</a>
+        <a href="#anime">Anime</a>
+        <a href="#movies">Movies</a>
+        <a href="#history">History</a>
+    </div>
+</nav>
+
+<section class="hero" id="home">
+    <h1>🌎 Hasnain Stories</h1>
+    <p>Discover stories about cartoons, anime, movies and history.</p>
+
+    <div class="clock-box">
+        <div id="clock">00:00:00</div>
+        <div id="date">Loading...</div>
+    </div>
+</section>
+
+<input id="search" type="text" placeholder="🔎 Search a story..." oninput="searchStories()">
+
+<!-- CARTOONS -->
+<section class="section" id="cartoons">
+<h2>🧸 Trending Cartoons</h2>
+<div class="cards">
+
+<div class="card"><h3>Tom and Jerry</h3><p>A famous cat-and-mouse comedy filled with clever chases and funny situations.</p><div class="buttons"><button onclick="openStory('tom')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Tom_and_Jerry" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Ben 10</h3><p>Ben Tennyson discovers the Omnitrix and learns to use alien powers.</p><div class="buttons"><button onclick="openStory('ben10')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Ben_10" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Doraemon</h3><p>A robot cat from the future helps Nobita with futuristic gadgets.</p><div class="buttons"><button onclick="openStory('doraemon')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Doraemon" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>SpongeBob SquarePants</h3><p>SpongeBob and his friends experience funny adventures in Bikini Bottom.</p><div class="buttons"><button onclick="openStory('spongebob')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/SpongeBob_SquarePants" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Adventure Time</h3><p>Finn and Jake explore the magical Land of Ooo.</p><div class="buttons"><button onclick="openStory('adventure')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Adventure_Time" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>The Amazing World of Gumball</h3><p>Gumball and Darwin turn ordinary life in Elmore into unusual adventures.</p><div class="buttons"><button onclick="openStory('gumball')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/The_Amazing_World_of_Gumball" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Oggy and the Cockroaches</h3><p>Oggy tries to enjoy a peaceful life while three cockroaches cause chaos.</p><div class="buttons"><button onclick="openStory('oggy')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Oggy_and_the_Cockroaches" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Mr. Bean: The Animated Series</h3><p>Mr. Bean repeatedly turns simple everyday problems into comic adventures.</p><div class="buttons"><button onclick="openStory('mrbean')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Mr._Bean:_The_Animated_Series" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Looney Tunes</h3><p>Classic animated characters create fast-paced comedy and memorable adventures.</p><div class="buttons"><button onclick="openStory('looney')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Looney_Tunes" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Teen Titans Go!</h3><p>The Teen Titans balance superhero responsibilities with everyday comedy.</p><div class="buttons"><button onclick="openStory('titans')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Teen_Titans_Go!" target="_blank">📚 Wikipedia</a></div></div>
+
+</div>
+</section>
+
+<!-- ANIME -->
+<section class="section" id="anime">
+<h2>🍥 Trending Anime</h2>
+<div class="cards">
+
+<div class="card"><h3>One Piece</h3><p>Luffy and his crew travel across the seas searching for the legendary One Piece.</p><div class="buttons"><button onclick="openStory('onepiece')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/One_Piece" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Naruto</h3><p>Naruto works to become a respected ninja while facing challenges and rivals.</p><div class="buttons"><button onclick="openStory('naruto')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Naruto" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Dragon Ball</h3><p>Goku trains, grows stronger and faces powerful opponents across many adventures.</p><div class="buttons"><button onclick="openStory('dragonball')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Dragon_Ball" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Jujutsu Kaisen</h3><p>Yuji becomes involved in the world of cursed spirits and jujutsu sorcerers.</p><div class="buttons"><button onclick="openStory('jujutsu')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Jujutsu_Kaisen" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Demon Slayer</h3><p>Tanjiro begins a difficult journey after his family is attacked and joins the Demon Slayer Corps.</p><div class="buttons"><button onclick="openStory('demonslayer')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Demon_Slayer:_Kimetsu_no_Yaiba" target="_blank">📚 Wikipedia</a></div></div>
+
+</div>
+</section>
+
+<!-- MOVIES -->
+<section class="section" id="movies">
+<h2>🎬 Movies — 2026</h2>
+<p style="color:#bbb;margin-bottom:22px">
+These are current/upcoming Indian movie titles listed for 2026. Release schedules can change.
+</p>
+
+<div class="cards">
+
+<div class="card"><h3>G.D.N.</h3><p>Biography-drama about the life and work of a remarkable inventor.</p><div class="buttons"><button onclick="openStory('gdn')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/G._D._Naidu" target="_blank">📚 Background</a></div></div>
+<div class="card"><h3>Prahaar</h3><p>A courtroom drama built around a difficult legal conflict.</p><div class="buttons"><button onclick="openStory('prahaar')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Bollywood" target="_blank">📚 Bollywood</a></div></div>
+<div class="card"><h3>Awarapan 2</h3><p>A new chapter connected to the Awarapan action-drama franchise.</p><div class="buttons"><button onclick="openStory('awarapan2')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Awarapan" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Batwara 1947</h3><p>A historical drama set around the turbulent period of Partition.</p><div class="buttons"><button onclick="openStory('batwara1947')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Partition_of_India" target="_blank">📚 History</a></div></div>
+<div class="card"><h3>Naagzilla</h3><p>A fantasy-comedy adventure involving a supernatural world.</p><div class="buttons"><button onclick="openStory('naagzilla')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Naga_(mythology)" target="_blank">📚 Background</a></div></div>
+<div class="card"><h3>The Paradise</h3><p>An action-thriller set around dangerous choices and survival.</p><div class="buttons"><button onclick="openStory('paradise')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Indian_cinema" target="_blank">📚 Indian Cinema</a></div></div>
+<div class="card"><h3>Toxic</h3><p>An action-thriller built around crime, power and dangerous ambitions.</p><div class="buttons"><button onclick="openStory('toxic')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Yash_(actor)" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Yellamma</h3><p>An upcoming Indian drama listed for August 2026.</p><div class="buttons"><button onclick="openStory('yellamma')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Indian_cinema" target="_blank">📚 Indian Cinema</a></div></div>
+<div class="card"><h3>Khosla Ka Ghosla 2</h3><p>A comedy-drama sequel connected to the beloved Khosla family story.</p><div class="buttons"><button onclick="openStory('khosla2')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Khosla_Ka_Ghosla" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Bhogi</h3><p>An upcoming Indian action-drama title listed for 2026.</p><div class="buttons"><button onclick="openStory('bhogi')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Indian_cinema" target="_blank">📚 Indian Cinema</a></div></div>
+<div class="card"><h3>Eetha</h3><p>An upcoming drama listed among the August 2026 Indian releases.</p><div class="buttons"><button onclick="openStory('eetha')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Shraddha_Kapoor" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Maatrubhumi</h3><p>An upcoming Indian film listed for August 2026.</p><div class="buttons"><button onclick="openStory('maatrubhumi')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Bollywood" target="_blank">📚 Bollywood</a></div></div>
+<div class="card"><h3>Dhamaal 4</h3><p>A comedy sequel returning to the chaotic style of the Dhamaal franchise.</p><div class="buttons"><button onclick="openStory('dhamaal4')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Dhamaal" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>The Battle of Galwan</h3><p>A war drama inspired by the 2020 Galwan Valley conflict.</p><div class="buttons"><button onclick="openStory('galwan')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/2020%E2%80%93China%E2%80%93India_skirmishes" target="_blank">📚 History</a></div></div>
+<div class="card"><h3>King</h3><p>An upcoming Hindi action film surrounded by strong audience anticipation.</p><div class="buttons"><button onclick="openStory('king')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Shah_Rukh_Khan" target="_blank">📚 Wikipedia</a></div></div>
+
+</div>
+</section>
+
+<!-- HISTORY -->
+<section class="section" id="history">
+<h2>📜 History</h2>
+<div class="cards">
+<div class="card"><h3>Ashoka</h3><p>A major Mauryan emperor remembered for his later association with Buddhism.</p><div class="buttons"><button onclick="openStory('ashoka')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Ashoka" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Genghis Khan</h3><p>The Mongol ruler who united Mongol tribes and founded a vast empire.</p><div class="buttons"><button onclick="openStory('genghis')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Genghis_Khan" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Alexander the Great</h3><p>The Macedonian king whose campaigns created one of the largest empires of the ancient world.</p><div class="buttons"><button onclick="openStory('alexander')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Alexander_the_Great" target="_blank">📚 Wikipedia</a></div></div>
+
+<div class="card"><h3>Umar ibn al-Khattab</h3><p>A major early Muslim leader and the second caliph, known for administration and expansion.</p><div class="buttons"><button onclick="openStory('umar')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Umar" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Saladin</h3><p>The Muslim ruler famous for his role in the Crusades and the recovery of Jerusalem.</p><div class="buttons"><button onclick="openStory('saladin')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Saladin" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Harun al-Rashid</h3><p>The Abbasid caliph associated with Baghdad's political and cultural importance.</p><div class="buttons"><button onclick="openStory('harun')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Harun_al-Rashid" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Tariq ibn Ziyad</h3><p>A military commander remembered for the beginning of the Muslim conquest of much of Iberia.</p><div class="buttons"><button onclick="openStory('tariq')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Tariq_ibn_Ziyad" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Mehmed II</h3><p>The Ottoman sultan who conquered Constantinople in 1453.</p><div class="buttons"><button onclick="openStory('mehmed')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Mehmed_II" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Babur</h3><p>The founder of the Mughal Empire in the Indian subcontinent.</p><div class="buttons"><button onclick="openStory('babur')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Babur" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Akbar the Great</h3><p>The Mughal emperor known for territorial expansion and major administrative reforms.</p><div class="buttons"><button onclick="openStory('akbar')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Akbar" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Shah Jahan</h3><p>The Mughal emperor whose reign is closely associated with the Taj Mahal.</p><div class="buttons"><button onclick="openStory('shahjahan')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Shah_Jahan" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Suleiman the Magnificent</h3><p>The Ottoman sultan whose long reign saw major military, legal and cultural developments.</p><div class="buttons"><button onclick="openStory('suleiman')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Suleiman_the_Magnificent" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Qin Shi Huang</h3><p>The first emperor of a unified China and a central figure in early imperial Chinese history.</p><div class="buttons"><button onclick="openStory('qin')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Qin_Shi_Huang" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Cleopatra</h3><p>The last active ruler of the Ptolemaic Kingdom of Egypt.</p><div class="buttons"><button onclick="openStory('cleopatra')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Cleopatra" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Julius Caesar</h3><p>A Roman general and statesman whose career transformed the late Roman Republic.</p><div class="buttons"><button onclick="openStory('caesar')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Julius_Caesar" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Augustus</h3><p>The first Roman emperor and a key figure in the transition from republic to empire.</p><div class="buttons"><button onclick="openStory('augustus')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Augustus" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Charlemagne</h3><p>The Frankish ruler who became emperor and helped shape medieval western Europe.</p><div class="buttons"><button onclick="openStory('charlemagne')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Charlemagne" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Mansa Musa</h3><p>The Mali ruler remembered for the wealth, influence and scholarship of the Mali Empire.</p><div class="buttons"><button onclick="openStory('mansa')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Mansa_Musa" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Joan of Arc</h3><p>A French historical figure who became a symbol of the French side during the Hundred Years' War.</p><div class="buttons"><button onclick="openStory('joan')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Joan_of_Arc" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Napoleon Bonaparte</h3><p>The French military leader who became emperor and reshaped European politics.</p><div class="buttons"><button onclick="openStory('napoleon')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Napoleon" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>George Washington</h3><p>The first president of the United States and a leading figure in the American Revolution.</p><div class="buttons"><button onclick="openStory('washington')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/George_Washington" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Abraham Lincoln</h3><p>The U.S. president who led the country during the American Civil War.</p><div class="buttons"><button onclick="openStory('lincoln')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Abraham_Lincoln" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Nelson Mandela</h3><p>The South African leader who became a major figure in the struggle against apartheid.</p><div class="buttons"><button onclick="openStory('mandela')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Nelson_Mandela" target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Martin Luther King Jr.</h3><p>An American civil-rights leader known for nonviolent activism against racial segregation.</p><div class="buttons"><button onclick="openStory('mlk')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Martin_Luther_King_Jr." target="_blank">📚 Wikipedia</a></div></div>
+<div class="card"><h3>Mahatma Gandhi</h3><p>An Indian independence leader associated with nonviolent political action.</p><div class="buttons"><button onclick="openStory('gandhi')">📖 Read Detailed Story</button><a class="wiki" href="https://en.wikipedia.org/wiki/Mahatma_Gandhi" target="_blank">📚 Wikipedia</a></div></div>
+</div>
+</section>
+
+<footer>
+<p>© 2026 Hasnain Stories</p>
+<p style="margin-top:8px">Built with HTML, CSS & JavaScript</p>
+</footer>
+
+<!-- STORY PAGE -->
+<div id="storyPage">
+<div class="story-window">
+    <h2 id="storyTitle"></h2>
+    <h3>📖 Story / Overview</h3>
+    <p id="storyText"></p>
+    <h3>👥 Main Characters / Context</h3>
+    <p id="storyCharacters"></p>
+    <h3>⭐ Why It Is Interesting</h3>
+    <p id="storyLegacy"></p>
+    <a id="storyWiki" class="wiki story-wiki" href="#" target="_blank">📚 Read More on Wikipedia / Background</a>
+    <button class="close-btn" onclick="closeStory()">✕ Close Story</button>
+</div>
+</div>
+
+<script>
+/* CLOCK */
+function updateClock(){
+    const now=new Date();
+    let h=now.getHours();
+    const m=String(now.getMinutes()).padStart(2,"0");
+    const s=String(now.getSeconds()).padStart(2,"0");
+    const ampm=h>=12?"PM":"AM";
+    h=h%12;if(h===0)h=12;
+    h=String(h).padStart(2,"0");
+    document.getElementById("clock").textContent=`${h}:${m}:${s} ${ampm}`;
+    document.getElementById("date").textContent=now.toLocaleDateString("en-US",{
+        weekday:"long",year:"numeric",month:"long",day:"numeric"
+    });
+}
+updateClock();
+setInterval(updateClock,1000);
+
+/* STORY DATA
+   These are original summaries, not copied text from movie/TV sources.
+*/
+const stories={
+
+tom:{
+title:"Tom and Jerry",
+wiki:"https://en.wikipedia.org/wiki/Tom_and_Jerry",
+text:`Tom and Jerry is an animated comedy centered on the rivalry between Tom, a cat, and Jerry, a mouse.
+Tom usually tries to catch Jerry, while Jerry uses quick thinking to escape.
+Their conflicts often begin with a small problem and grow into a large comic chase.
+The setting can change from a house to a garden, street or other location.
+Tom may prepare an elaborate trap to catch Jerry.
+Jerry often notices the danger and finds a clever way around it.
+Sometimes Tom's own plan creates an unexpected problem for him.
+The two characters can also cooperate when they face a bigger threat.
+The stories rely heavily on visual comedy, timing and expressive animation.
+The simple rivalry allows each short adventure to have a different situation.
+The characters became internationally famous through theatrical shorts and television.
+Their long-running popularity has made them one of animation's best-known duos.`,
+characters:`Tom is a determined cat who wants to catch Jerry. Jerry is a clever mouse who relies on speed and strategy. Spike, Tyke and Tuffy are among the recurring supporting characters.`,
+legacy:`The franchise became famous around the world because its visual comedy can be understood across languages. It has appeared in television, films, comics, games and other media.`
+},
+
+ben10:{
+title:"Ben 10",
+wiki:"https://en.wikipedia.org/wiki/Ben_10",
+text:`Ben Tennyson is a young boy who discovers a mysterious alien device called the Omnitrix.
+The device attaches to Ben and gives him access to different alien forms.
+Each form has a different ability, strength or special power.
+Ben initially has difficulty controlling the device properly.
+His adventures become a mixture of alien encounters, family travel and superhero-style problems.
+Ben's cousin Gwen often helps him when situations become difficult.
+His grandfather Max provides experience and guidance during their journeys.
+Ben gradually learns that having powers also means having responsibility.
+Enemies attempt to steal, control or defeat the Omnitrix.
+Ben must think carefully about which alien form is best for a particular problem.
+Over time, the franchise expands its alien world and introduces many new characters.
+The story combines science fiction, action, comedy and family adventure.`,
+characters:`Ben Tennyson is the main hero. Gwen is his intelligent and capable cousin, while Grandpa Max is an experienced guide. The Omnitrix itself is central to the entire franchise.`,
+legacy:`Ben 10 became a major animated franchise with several television series, movies, games and merchandise. Its alien-transformation concept became one of its most recognizable features.`
+},
+
+doraemon:{
+title:"Doraemon",
+wiki:"https://en.wikipedia.org/wiki/Doraemon",
+text:`Doraemon is a robotic cat from the future who travels back in time to help Nobita Nobi.
+Nobita often struggles with schoolwork, confidence and everyday problems.
+Doraemon carries futuristic gadgets inside his special pocket.
+These gadgets can temporarily solve problems or create new possibilities.
+Nobita sometimes uses a gadget without thinking about the consequences.
+A simple request can therefore become a much bigger adventure.
+Friends such as Shizuka, Gian and Suneo are often involved.
+Doraemon usually tries to teach Nobita through experience rather than simply fixing everything.
+The stories mix comedy with friendship, family life and imagination.
+Many adventures explore what happens when advanced technology is used carelessly.
+Nobita gradually learns lessons about responsibility, honesty and friendship.
+The series is known for its imaginative gadgets and warm emotional moments.`,
+characters:`Doraemon is the helpful robot cat. Nobita is his young friend, while Shizuka, Gian and Suneo are important classmates and friends.`,
+legacy:`Doraemon became one of Japan's most recognizable fictional characters and has been enjoyed by audiences in many countries.`
+},
+
+spongebob:{
+title:"SpongeBob SquarePants",
+wiki:"https://en.wikipedia.org/wiki/SpongeBob_SquarePants",
+text:`SpongeBob SquarePants lives in the underwater city of Bikini Bottom.
+He works at the Krusty Krab and takes great pride in doing his job.
+SpongeBob is optimistic, energetic and usually excited about ordinary activities.
+His best friend Patrick often joins him in unusual adventures.
+Squidward lives nearby and frequently becomes frustrated by their enthusiasm.
+Mr. Krabs runs the Krusty Krab and is focused on his restaurant.
+Many stories begin with a small everyday situation.
+A simple job, competition or friendship problem can quickly become chaotic.
+SpongeBob usually approaches problems with enthusiasm rather than fear.
+The series uses underwater fantasy settings for comedy and imaginative situations.
+Friendship and perseverance are recurring themes.
+The show's unusual humor and colorful world have made it popular with many audiences.`,
+characters:`SpongeBob is the central character. Patrick is his best friend, Squidward is his neighbor and coworker, and Mr. Krabs is his employer.`,
+legacy:`SpongeBob became a major animated television franchise with films, games, merchandise and many years of television episodes.`
+},
+
+adventure:{
+title:"Adventure Time",
+wiki:"https://en.wikipedia.org/wiki/Adventure_Time",
+text:`Adventure Time follows Finn the human and Jake the magical dog in the Land of Ooo.
+The two friends travel through a strange world filled with kingdoms, monsters and mysteries.
+Finn often wants to help people and prove himself as a hero.
+Jake can stretch and change his shape using his magical abilities.
+Their adventures can be funny one moment and surprisingly emotional the next.
+Princess Bubblegum is an important figure in the Candy Kingdom.
+The Ice King and many other unusual characters create new challenges.
+As the series develops, the world of Ooo reveals a deeper history.
+Characters have complicated relationships and personal goals.
+The story gradually explores friendship, responsibility, identity and change.
+Many adventures connect to larger mysteries about the world.
+The combination of comedy, fantasy and emotional storytelling became a major strength.`,
+characters:`Finn is a young hero and Jake is his magical best friend. Princess Bubblegum, Marceline and the Ice King are among the major recurring characters.`,
+legacy:`Adventure Time became known for imaginative world-building and a style that could appeal to both younger viewers and older audiences.`
+},
+
+gumball:{
+title:"The Amazing World of Gumball",
+wiki:"https://en.wikipedia.org/wiki/The_Amazing_World_of_Gumball",
+text:`Gumball Watterson lives in the unusual town of Elmore with his family.
+His adopted brother Darwin is also his closest friend and adventure partner.
+Ordinary school days often turn into strange and unexpected situations.
+Gumball frequently makes a decision that creates a much larger problem.
+Darwin often tries to help him find a sensible solution.
+Their sister Anais is intelligent and can sometimes understand the situation better.
+Their parents Richard and Nicole add another source of comedy to family life.
+The series mixes different animation styles and unusual characters.
+Stories can involve school, friendship, family arguments or completely strange events.
+The characters often learn something after their plans go wrong.
+The humor comes from exaggeration, surprise and the contrast between ordinary life and absurd events.
+The show also explores friendship, family and growing up.`,
+characters:`Gumball is energetic and impulsive. Darwin is his loyal brother, Anais is the intelligent younger sister, Nicole is their capable mother and Richard is their playful father.`,
+legacy:`The series became known for its unusual visual style, fast comedy and creative use of different animation techniques.`
+},
+
+oggy:{
+title:"Oggy and the Cockroaches",
+wiki:"https://en.wikipedia.org/wiki/Oggy_and_the_Cockroaches",
+text:`Oggy is a blue cat who wants to enjoy a peaceful and comfortable life.
+His plans are repeatedly interrupted by three troublesome cockroaches.
+Joey, Dee Dee and Marky constantly create problems around Oggy's home.
+The cockroaches may steal food, damage objects or simply cause chaos.
+Oggy tries many different methods to stop them.
+His attempts often make the situation even more complicated.
+Jack sometimes helps Oggy deal with the trouble.
+The stories rely strongly on physical comedy and visual gags.
+Many episodes have little or no spoken dialogue.
+The conflict can move quickly from a small prank to a huge chase.
+Oggy's desire for peace is repeatedly tested by the cockroaches.
+The simple setup allows the series to create many different comic situations.`,
+characters:`Oggy is the main cat, while Joey, Dee Dee and Marky are the three cockroaches. Jack is Oggy's friend and often becomes involved in their conflicts.`,
+legacy:`The series became internationally popular because its visual comedy can be understood without depending heavily on dialogue.`
+},
+
+mrbean:{
+title:"Mr. Bean: The Animated Series",
+wiki:"https://en.wikipedia.org/wiki/Mr._Bean:_The_Animated_Series",
+text:`The animated Mr. Bean series follows the comic everyday life of Mr. Bean.
+He often tries to solve a simple problem using an unusual method.
+His plans may work for a moment before creating a new problem.
+Bean's teddy bear is an important companion in many adventures.
+He also interacts with neighbors, shopkeepers and other characters.
+Small activities such as shopping, cooking or traveling can become chaotic.
+Bean rarely needs a complicated explanation for his actions.
+His expressions and physical comedy communicate much of the humor.
+Many stories depend on misunderstandings and unexpected consequences.
+The animated format allows situations to become even more exaggerated.
+Despite his strange behavior, Bean often tries to achieve a simple goal.
+The comedy comes from watching that goal become increasingly difficult.`,
+characters:`Mr. Bean is the central character, with his teddy bear and a variety of neighbors and everyday characters appearing around him.`,
+legacy:`The animated series expanded the world of the original Mr. Bean character and introduced his style of visual comedy to a new format.`
+},
+
+looney:{
+title:"Looney Tunes",
+wiki:"https://en.wikipedia.org/wiki/Looney_Tunes",
+text:`Looney Tunes is a collection of animated comedy stories featuring many famous characters.
+Bugs Bunny often relies on confidence and clever wordplay.
+Daffy Duck is ambitious and frequently creates problems through his own plans.
+Porky Pig, Tweety, Sylvester and many others appear in different adventures.
+Many stories are built around a rivalry between two characters.
+A character may create a plan to gain food, fame or an advantage.
+The plan usually leads to a surprising reversal.
+Visual comedy, exaggerated movement and fast timing are central to the style.
+Different shorts use different settings and combinations of characters.
+The stories can move quickly from an ordinary situation to complete chaos.
+The characters became famous through theatrical animation and later television.
+Their distinctive personalities helped make them lasting figures in animation.`,
+characters:`Bugs Bunny, Daffy Duck, Porky Pig, Tweety and Sylvester are among the best-known characters associated with the franchise.`,
+legacy:`Looney Tunes has had a major influence on animation and has appeared in television, films, comics, games and merchandise.`
+},
+
+titans:{
+title:"Teen Titans Go!",
+wiki:"https://en.wikipedia.org/wiki/Teen_Titans_Go!",
+text:`Teen Titans Go! follows a group of young superheroes living together in a tower.
+Robin tries to lead the team and often takes his responsibilities very seriously.
+Starfire is friendly and enthusiastic but sometimes misunderstands ordinary customs.
+Raven is calm and sarcastic and often reacts differently from the others.
+Cyborg enjoys technology, games and food.
+Beast Boy is energetic and can transform into animals.
+Instead of focusing only on serious superhero battles, the series often explores everyday comedy.
+The heroes argue about chores, games, food and personal competitions.
+Small disagreements can become exaggerated superhero conflicts.
+Their friendships usually help them solve the situation in the end.
+The series uses fast jokes and playful references to superhero ideas.
+Its main strength is turning superhero life into everyday comedy.`,
+characters:`Robin, Starfire, Raven, Cyborg and Beast Boy form the main team. Their different personalities create most of the show's comic situations.`,
+legacy:`The series became known for its comedic interpretation of the Teen Titans and for making superhero characters accessible through humor.`
+},
+
+onepiece:{
+title:"One Piece",
+wiki:"https://en.wikipedia.org/wiki/One_Piece",
+text:`One Piece follows Monkey D. Luffy and his journey to become the Pirate King.
+Luffy sets out to find the legendary treasure known as the One Piece.
+He gathers a crew of friends with different skills and dreams.
+The Straw Hat crew travels between islands and encounters many cultures and conflicts.
+Each new island can introduce new allies, enemies and mysteries.
+Luffy usually helps people who are facing unfair treatment.
+His crew members also have personal goals that shape their journeys.
+The story gradually reveals a much larger history behind the world.
+Pirate groups, governments and other powerful organizations influence the adventure.
+Friendship and loyalty are central to the crew's relationship.
+The journey combines comedy, action, mystery and emotional moments.
+The search for the One Piece connects many separate adventures into a larger story.`,
+characters:`Luffy is the captain. Zoro, Nami, Usopp, Sanji and the other Straw Hats each bring unique skills and personal dreams.`,
+legacy:`One Piece became one of the most successful manga and anime franchises, known for its huge world and long-running adventure.`
+},
+
+naruto:{
+title:"Naruto",
+wiki:"https://en.wikipedia.org/wiki/Naruto",
+text:`Naruto Uzumaki is a young ninja who dreams of becoming Hokage.
+He grows up feeling isolated and wants the people around him to recognize him.
+Naruto begins his training at the ninja academy and later joins Team 7.
+Sasuke Uchiha and Sakura Haruno become important teammates.
+Their teacher Kakashi helps them understand teamwork and discipline.
+Naruto works hard even when other people doubt him.
+His journey includes missions, rivalries and difficult personal choices.
+The ninja world contains many villages, clans and powerful techniques.
+Naruto's rivalry with Sasuke becomes one of the central relationships.
+Over time, Naruto learns more about his own past and the challenges facing the world.
+He also develops stronger friendships and a deeper sense of responsibility.
+The story focuses on perseverance, bonds and the desire to change one's future.`,
+characters:`Naruto is the central character. Sasuke, Sakura and Kakashi are key members of his early journey, while many other ninjas become important later.`,
+legacy:`Naruto became a major global anime and manga franchise and influenced a large international audience of anime fans.`
+},
+
+dragonball:{
+title:"Dragon Ball",
+wiki:"https://en.wikipedia.org/wiki/Dragon_Ball",
+text:`Dragon Ball follows Goku from childhood through many stages of his life.
+He begins as a cheerful martial artist with extraordinary natural strength.
+Goku meets friends who join him on adventures and training journeys.
+The Dragon Balls are magical objects connected to many early adventures.
+As the story grows, the focus expands toward powerful fighters and larger threats.
+Goku trains under experienced teachers to improve his abilities.
+Competitions and battles push him to discover new levels of strength.
+The series gradually introduces a much larger universe.
+Goku's desire to improve is usually stronger than his desire for fame.
+His friends often provide support, strategy and motivation.
+The story combines martial arts, comedy, adventure and science fiction elements.
+Goku's journey becomes a continuing search for growth and new challenges.`,
+characters:`Goku is the central hero. Vegeta, Bulma, Gohan, Piccolo, Krillin and many other characters become important parts of the wider story.`,
+legacy:`Dragon Ball became one of the world's most recognizable anime franchises and had a major influence on global anime culture.`
+},
+
+jujutsu:{
+title:"Jujutsu Kaisen",
+wiki:"https://en.wikipedia.org/wiki/Jujutsu_Kaisen",
+text:`Jujutsu Kaisen follows Yuji Itadori, a student who becomes involved with cursed energy.
+Yuji encounters a dangerous supernatural object and is drawn into the world of jujutsu sorcerers.
+He becomes connected to the powerful curse Sukuna.
+Satoru Gojo becomes one of the important mentors in Yuji's early journey.
+Yuji trains with other students while learning how curses work.
+The sorcerers fight supernatural threats that ordinary people cannot easily see.
+Different characters have different techniques and personal motivations.
+The story explores the cost of using supernatural power.
+Friendship and teamwork are important because individual strength is not always enough.
+The world contains many competing beliefs about how curses should be handled.
+Yuji repeatedly faces difficult choices about responsibility and sacrifice.
+The series combines action, supernatural mystery and character-focused drama.`,
+characters:`Yuji is the main protagonist. Megumi, Nobara and Gojo are central characters in his early journey, while Sukuna represents a major supernatural threat.`,
+legacy:`Jujutsu Kaisen became one of the most prominent modern anime and manga franchises.`
+},
+
+demonslayer:{
+title:"Demon Slayer",
+wiki:"https://en.wikipedia.org/wiki/Demon_Slayer:_Kimetsu_no_Yaiba",
+text:`Demon Slayer follows Tanjiro Kamado after a tragedy changes his family life.
+Tanjiro discovers that his sister Nezuko has become a demon but still retains human qualities.
+He decides to search for a way to help her.
+To do this, Tanjiro trains and eventually joins the Demon Slayer Corps.
+The organization fights demons that threaten ordinary people.
+Tanjiro meets other young fighters who become important companions.
+Each fighter develops different techniques and approaches to battle.
+The journey takes them through villages, forests and dangerous locations.
+Tanjiro tries to remain compassionate even while fighting dangerous enemies.
+His determination is connected to his promise to protect Nezuko.
+The story combines action with themes of family, perseverance and empathy.
+The world gradually reveals more about demons and the people who hunt them.`,
+characters:`Tanjiro is the central hero and Nezuko is his sister. Zenitsu and Inosuke become important companions, while the Hashira are elite members of the Demon Slayer Corps.`,
+legacy:`Demon Slayer became a major international anime franchise and is especially known for its animation and emotional storytelling.`
+},
+
+/* MOVIES — longer original summaries */
+gdn:{
+title:"G.D.N.",
+wiki:"https://en.wikipedia.org/wiki/G._D._Naidu",
+text:`G.D.N. is a 2026 biography-drama listed among the August 2026 Indian releases.
+The film is connected to the life of inventor G. D. Naidu.
+Its subject is known for experimentation, engineering and practical innovation.
+The story focuses on the journey of a person interested in understanding how things work.
+It explores the difficulties that can come with trying to build something new.
+The period setting also gives the story a historical and technological background.
+The film presents ambition as something that requires patience and repeated effort.
+It also explores the relationship between personal goals and wider society.
+The character's work becomes an important part of the story's central conflict.
+Rather than being only about inventions, the film can be viewed as a human biography.
+The project was listed for release on 7 August 2026.
+This page intentionally uses an original overview rather than copying a film synopsis.`,
+characters:`The central figure is based on inventor G. D. Naidu. The film's supporting characters and exact dramatic events should be checked against official sources.`,
+legacy:`The subject's connection with Indian engineering and innovation gives the film historical interest beyond its drama elements.`
+},
+
+prahaar:{
+title:"Prahaar",
+wiki:"https://en.wikipedia.org/wiki/Bollywood",
+text:`Prahaar is listed as a Hindi courtroom drama for August 2026.
+The story is built around a legal conflict that places important decisions before a court.
+A courtroom setting allows different characters to present competing arguments.
+The main character must deal with pressure while trying to establish the truth.
+Evidence, testimony and interpretation become important parts of the narrative.
+The film can explore how a legal decision affects ordinary people.
+Personal relationships may also complicate the professional conflict.
+The courtroom becomes the central place where different versions of events are challenged.
+The story's tension comes from questions about responsibility and justice.
+The characters have to decide whether they will protect themselves or reveal uncomfortable facts.
+The project was listed for release on 7 August 2026.
+Because the official detailed plot can change before release, this is an original overview.
+The page can be updated later with confirmed plot information.`,
+characters:`Reported cast listings include Rajkummar Rao and Wamiqa Gabbi. The exact roles and detailed character relationships should be confirmed from official material.`,
+legacy:`Courtroom dramas can combine legal questions with personal conflict, making them useful for stories about justice and difficult choices.`
+},
+
+awarapan2:{
+title:"Awarapan 2",
+wiki:"https://en.wikipedia.org/wiki/Awarapan",
+text:`Awarapan 2 is a new film connected to the Awarapan franchise.
+The project is listed as a Hindi drama and romance with action elements.
+The story is expected to continue the franchise's interest in emotional conflict.
+Its central themes can include love, sacrifice, loyalty and difficult decisions.
+The action elements provide external pressure while the emotional story drives the characters.
+The film's connection to the earlier Awarapan gives returning audiences a familiar starting point.
+At the same time, a sequel needs its own characters and conflicts.
+The story can move between personal relationships and dangerous circumstances.
+Characters may be forced to choose between their feelings and their responsibilities.
+The project was listed for release on 14 August 2026.
+The exact full plot should be taken from official material after release.
+This page therefore gives an original overview rather than a copied synopsis.
+It is designed to work as a story card on Hasnain Stories.`,
+characters:`Reported listings include Emraan Hashmi and Disha Patani. Exact character details should be updated from official sources.`,
+legacy:`Awarapan is remembered as a cult Hindi film, so the sequel has interest among viewers familiar with the earlier movie.`
+},
+
+batwara1947:{
+title:"Batwara 1947",
+wiki:"https://en.wikipedia.org/wiki/Partition_of_India",
+text:`Batwara 1947 is listed as a historical action-drama set around the Partition period.
+The story uses a major historical event as the background for its characters.
+The Partition changed the lives of millions of people across the region.
+A family or community story can show how political decisions affect ordinary lives.
+The film's action elements add conflict to a period already marked by uncertainty.
+Characters may face choices involving home, family, safety and identity.
+The historical setting also creates tension between personal relationships and larger events.
+Stories from this period can show both separation and human resilience.
+The film is listed with Sunny Deol and Preity Zinta among its cast.
+Its scheduled date in current listings is 14 August 2026.
+The exact fictional plot should be distinguished from documented historical facts.
+This page therefore provides context instead of pretending to reproduce the official screenplay.
+The Wikipedia link gives broader background on the Partition.`,
+characters:`Current listings include Sunny Deol and Preity Zinta. Exact roles and fictional relationships should be checked against official movie information.`,
+legacy:`The historical setting gives the film an opportunity to connect personal drama with one of the most important events in modern South Asian history.`
+},
+
+naagzilla:{
+title:"Naagzilla: Naag Lok Ka Pehla Kaand",
+wiki:"https://en.wikipedia.org/wiki/Naga_(mythology)",
+text:`Naagzilla is listed as an adventure, comedy, fantasy and supernatural film.
+The title points toward a world involving supernatural snake mythology.
+The combination of fantasy and comedy suggests a lighter approach to the supernatural setting.
+Characters can enter situations where ordinary rules do not work.
+The adventure element gives the story room for unusual locations and magical problems.
+Comedy can come from characters trying to understand or survive the strange world.
+The supernatural setting also allows the film to create larger-than-life situations.
+The project is associated with Kartik Aaryan in current listings.
+It was listed for release around August 2026.
+The exact official plot may develop as promotion continues.
+This story description is intentionally an original overview rather than copied promotional text.
+The background link explains the broader cultural idea of naga traditions.
+The movie page can later be updated with confirmed characters and events.`,
+characters:`Current listings include Kartik Aaryan and Dhruv Bhardwaj. Detailed character roles should be checked against official movie material.`,
+legacy:`The project stands out because it combines comedy and fantasy with supernatural mythology, giving the movie a distinctive genre mix.`
+},
+
+paradise:{
+title:"The Paradise",
+wiki:"https://en.wikipedia.org/wiki/Indian_cinema",
+text:`The Paradise is listed as an upcoming action-thriller for August 2026.
+The story is expected to place its characters in a dangerous environment.
+Action thrillers often build tension through pursuit, conflict and difficult choices.
+The central character may have to survive circumstances that are larger than expected.
+The title suggests a contrast between an attractive setting and the dangers inside it.
+The thriller element can reveal information gradually rather than all at once.
+Characters may have competing goals that bring them into conflict.
+Friendship, loyalty and survival can become important parts of the narrative.
+The project is associated with Nani and Kayadu Lohar in current listings.
+The listed release date is 21 August 2026.
+The detailed official story should be updated when the filmmakers release it.
+This page avoids presenting unconfirmed plot details as facts.
+It is written as an original overview for the Hasnain Stories website.`,
+characters:`Current listings associate the film with Nani and Kayadu Lohar. Exact roles and character relationships should be confirmed from official material.`,
+legacy:`Its action-thriller genre and prominent cast make it one of the Indian films listed for the August 2026 release period.`
+},
+
+toxic:{
+title:"Toxic",
+wiki:"https://en.wikipedia.org/wiki/Yash_(actor)",
+text:`Toxic is listed as an action-thriller associated with actor Yash.
+The film is designed around a darker world of danger, power and ambition.
+An action-thriller structure allows the main character to face escalating threats.
+The story can explore how power changes relationships and personal choices.
+Characters may have hidden motives that are revealed as the conflict grows.
+The title itself suggests a world where relationships or environments can become harmful.
+The film has attracted attention because of its scale and its lead actor.
+Yash is one of the major names associated with the project.
+Current listings place the film in the 2026 release schedule.
+The exact full plot should be taken from official sources rather than guesses.
+This overview focuses on genre and broad themes.
+It does not copy dialogue, screenplay text or a detailed copyrighted synopsis.
+The page can be updated when the official story becomes public.`,
+characters:`Yash is the leading name associated with the film, with Nayanthara also listed in current release information. Exact roles should be checked against official sources.`,
+legacy:`The project has strong anticipation because of its action-thriller genre, scale and connection with Yash.`
+},
+
+yellamma:{
+title:"Yellamma",
+wiki:"https://en.wikipedia.org/wiki/Indian_cinema",
+text:`Yellamma is listed among the Indian films scheduled for August 2026.
+The project is described as a drama in current release listings.
+A drama format allows the story to focus on people, relationships and emotional decisions.
+The title connects the film to a cultural name with roots in South Asian tradition.
+The characters may face personal challenges that require difficult choices.
+Family and community can play important roles in a character-driven story.
+The film is listed for release on 28 August 2026.
+Current listings associate the project with Devi Sri Prasad.
+Because detailed official plot information can change, this page avoids inventing specific events.
+Instead, it provides a broad description of the type of story viewers can expect.
+The full plot should be added after official publication or release.
+This keeps the Hasnain Stories page accurate.
+The background link provides general information about Indian cinema.`,
+characters:`Current listings associate the project with Devi Sri Prasad. Detailed character roles should be confirmed from official movie information.`,
+legacy:`Its drama classification and cultural title make it a distinct entry in the 2026 Indian release calendar.`
+},
+
+khosla2:{
+title:"Khosla Ka Ghosla 2",
+wiki:"https://en.wikipedia.org/wiki/Khosla_Ka_Ghosla",
+text:`Khosla Ka Ghosla 2 is a comedy-drama sequel connected to Khosla Ka Ghosla.
+The earlier story is remembered for its family-centered humor and property conflict.
+A sequel can return to the Khosla family's everyday problems while introducing new complications.
+The comedy can come from ordinary people trying to deal with unusually difficult situations.
+Family members may have different ideas about what should happen next.
+The story can also explore changing relationships between generations.
+The project is listed as a 2026 Hindi release.
+Current listings place it on the August release schedule.
+Because the official full plot should come from the filmmakers, this page avoids invented scenes.
+Instead, it explains the sequel's broad connection to the original film.
+The movie can appeal to viewers who enjoyed the earlier family comedy.
+The Wikipedia link provides background on the original film.
+The Hasnain Stories page can be updated with confirmed plot details after release.`,
+characters:`Current listings include Boman Irani, Ravi Kishan and other cast members. Exact roles should be confirmed from official information.`,
+legacy:`The original Khosla Ka Ghosla is remembered for its relatable family humor, making a sequel naturally interesting to fans of the franchise.`
+},
+
+bhogi:{
+title:"Bhogi",
+wiki:"https://en.wikipedia.org/wiki/Indian_cinema",
+text:`Bhogi is listed as an upcoming Indian action-drama title for August 2026.
+The story combines the personal focus of drama with the tension of action.
+An action-drama can place its characters in situations where emotional choices have serious consequences.
+The central character may have to balance personal relationships with outside pressure.
+The title is also connected with a traditional South Asian cultural term.
+The film is associated with Sharwanand and Anupama Parameswaran in current listings.
+Current release information places the title around 28 August 2026.
+The exact story has not been reproduced here because an official detailed synopsis should be used.
+This overview keeps the page useful without presenting speculation as fact.
+The action side can provide conflict while the drama explores the characters' motivations.
+The story can be expanded when official details become available.
+This makes the entry easy to maintain on a website.
+The background link points to general Indian cinema information.`,
+characters:`Current listings associate the film with Sharwanand and Anupama Parameswaran. Exact roles should be checked against official material.`,
+legacy:`The film is notable in the 2026 calendar for combining action and drama in an Indian release.`
+},
+
+eetha:{
+title:"Eetha",
+wiki:"https://en.wikipedia.org/wiki/Shraddha_Kapoor",
+text:`Eetha is listed as a 2026 Indian biography-drama.
+The biography format suggests that the story is connected to a real person or real-life subject.
+Such stories often combine personal experiences with historical or social context.
+The film is associated with Shraddha Kapoor and Randeep Hooda in current listings.
+The characters may face obstacles connected with their careers, families or circumstances.
+A biography-drama can show both public achievements and private challenges.
+The story may also explore how a person's choices affect people around them.
+The project is listed for release on 28 August 2026.
+The exact real-life events and fictionalized portions should be checked against official material.
+This page intentionally avoids inventing specific scenes.
+It provides a broad introduction suitable for a movie card.
+Once the official plot is published, the page can be expanded.
+The Wikipedia link provides information about one of the listed cast members.`,
+characters:`Current listings include Shraddha Kapoor and Randeep Hooda. Exact roles and the real-life subject should be confirmed from official sources.`,
+legacy:`Biography films can introduce audiences to real people and events while presenting them through a dramatic storytelling format.`
+},
+
+maatrubhumi:{
+title:"Maatrubhumi",
+wiki:"https://en.wikipedia.org/wiki/Bollywood",
+text:`Maatrubhumi is listed among the Indian films scheduled for August 2026.
+The title suggests a story connected with homeland, identity or belonging.
+The drama can explore how personal lives are affected by larger social circumstances.
+Characters may have to make choices about family, community and their future.
+The title's patriotic or cultural meaning can provide an important emotional background.
+A story built around homeland can also examine migration, memory or responsibility.
+Current listings associate the film with Salman Khan and Chitrangada Singh.
+The exact official storyline should be used when the film's final synopsis is released.
+This page therefore gives a broad introduction instead of an invented detailed plot.
+The film's place in the 2026 release calendar gives it interest for Hindi-film audiences.
+The story section can be updated as official information becomes available.
+This keeps the website from presenting rumors as facts.
+The Wikipedia link provides general Bollywood background.`,
+characters:`Current listings associate the project with Salman Khan and Chitrangada Singh. Exact character names and roles should be confirmed officially.`,
+legacy:`The title and reported cast make it a notable entry in the 2026 Hindi-film calendar.`
+},
+
+dhamaal4:{
+title:"Dhamaal 4",
+wiki:"https://en.wikipedia.org/wiki/Dhamaal",
+text:`Dhamaal 4 continues the comedy tradition of the Dhamaal franchise.
+The series is known for groups of characters getting caught in chaotic situations.
+The comedy often grows from misunderstandings, competition and unusual plans.
+Characters may chase the same goal while repeatedly getting in each other's way.
+The sequel gives the franchise another opportunity to use its familiar comic style.
+The story can combine road adventures, teamwork and rivalry.
+The characters often have very different personalities and priorities.
+That contrast creates many of the franchise's comic situations.
+The film is part of the wider 2026 Indian movie calendar.
+Current audience discussion also includes the film among Hindi releases being followed in 2026.
+The exact full plot should be taken from official material.
+This page uses an original summary rather than copying a film synopsis.
+The Wikipedia link provides background on the earlier Dhamaal film.`,
+characters:`The Dhamaal franchise is built around an ensemble of comic characters. Exact returning cast and roles should be checked against the latest official information.`,
+legacy:`Dhamaal has remained recognizable as a Hindi comedy franchise, so another sequel naturally attracts viewers who enjoy ensemble comedy.`
+},
+
+galwan:{
+title:"The Battle of Galwan",
+wiki:"https://en.wikipedia.org/wiki/2020%E2%80%93China%E2%80%93India_skirmishes",
+text:`The Battle of Galwan is a war drama connected to the 2020 Galwan Valley conflict.
+The real event involved Indian and Chinese forces in the Himalayan region.
+A film based on such an event can focus on soldiers, duty and difficult conditions.
+The mountain environment creates a challenging setting for the characters.
+The story can show how military decisions affect individuals and their units.
+Historical films also have to balance dramatic storytelling with real events.
+The project has been discussed as a major Indian war-film release for 2026.
+The exact cinematic version of events should be separated from historical records.
+This page therefore gives historical context rather than claiming to reproduce the screenplay.
+The film can introduce viewers to the broader circumstances surrounding the conflict.
+The Wikipedia link provides a starting point for the historical background.
+Official movie information should be used for the final cast and plot details.
+The page can later be expanded with confirmed production information.`,
+characters:`The story concerns military personnel connected to the Galwan Valley conflict. Specific film characters and portrayals should be checked against official sources.`,
+legacy:`The real historical event is significant in modern India-China relations, giving the film a strong historical dimension.`
+},
+
+king:{
+title:"King",
+wiki:"https://en.wikipedia.org/wiki/Shah_Rukh_Khan",
+text:`King is an upcoming Hindi action film associated with Shah Rukh Khan.
+The project has been included among the major anticipated Hindi films of 2026.
+Its action genre suggests a story centered on danger, strategy and high-stakes conflict.
+The title presents a strong central identity for its main character.
+The film has attracted attention because of its star cast and large-scale expectations.
+An action story can move between personal goals and larger threats.
+Characters may have competing ideas about power, loyalty and responsibility.
+The exact plot should be taken from official promotional material once fully released.
+This page intentionally avoids inventing specific scenes or an ending.
+Instead, it gives a general introduction to the project.
+The movie can be updated later with official character names and story details.
+Its place in the 2026 calendar makes it useful for a current movie section.
+The Wikipedia link provides general information about the lead actor.`,
+characters:`Shah Rukh Khan is the major name associated with the project. Exact character details and supporting roles should be confirmed from official sources.`,
+legacy:`The project is one of the widely anticipated Hindi films in the 2026 release conversation, particularly because of its major star association.`
+},
+
+/* HISTORY */
+ashoka:{
+title:"Ashoka",
+wiki:"https://en.wikipedia.org/wiki/Ashoka",
+text:`Ashoka was a major ruler of the Maurya Empire in ancient India.
+He became emperor after a period of political and military expansion.
+The Mauryan state controlled a large territory during his reign.
+The Kalinga War became an important turning point in traditional accounts of his life.
+After the war, Ashoka became strongly associated with Buddhist ideas.
+He promoted principles connected with moral conduct and social responsibility.
+Edicts attributed to Ashoka were placed on rocks and pillars across parts of his empire.
+These inscriptions provide important evidence about his policies and ideas.
+He supported the spread of Buddhism beyond his own immediate region.
+Ashoka is remembered differently by historians depending on the evidence and interpretation.
+His reign remains important in the study of ancient South Asian political history.
+His symbols and historical legacy also influenced modern India.`,
+characters:`Ashoka was a Mauryan emperor. His reign is studied through inscriptions, archaeological evidence and later historical traditions.`,
+legacy:`Ashoka remains one of the best-known rulers of ancient South Asia, especially because of his inscriptions and association with Buddhism.`
+},
+
+genghis:{
+title:"Genghis Khan",
+wiki:"https://en.wikipedia.org/wiki/Genghis_Khan",
+text:`Genghis Khan was the founder of the Mongol Empire.
+He was born as Temujin and grew up in a period of conflict among Mongol tribes.
+Through alliances, leadership and warfare, he gradually united many groups.
+He was proclaimed Genghis Khan in the early thirteenth century.
+His armies then expanded into large parts of Asia.
+The Mongol military relied on mobility, organization and disciplined tactics.
+The empire connected territories across a huge part of Eurasia.
+Trade and communication also developed across regions under Mongol rule.
+At the same time, Mongol conquests caused enormous destruction and loss of life.
+Genghis Khan's historical legacy is therefore complex.
+His successors continued expanding the empire after his death.
+The Mongol Empire became one of the largest contiguous land empires in history.`,
+characters:`Genghis Khan was originally known as Temujin. His successors, generals and family members played important roles in the expansion of the Mongol Empire.`,
+legacy:`His empire had lasting effects on Eurasian politics, trade, warfare and cultural exchange.`
+},
+
+alexander:{
+title:"Alexander the Great",
+wiki:"https://en.wikipedia.org/wiki/Alexander_the_Great",
+text:`Alexander the Great was king of Macedon and one of the most famous military leaders of antiquity.
+He became king after the death of his father, Philip II.
+Alexander continued Macedonian expansion into the Persian Empire.
+His campaigns took him through Asia Minor, Egypt, Persia and into parts of South Asia.
+He won several major battles against Persian forces.
+Alexander also founded or renamed cities during his campaigns.
+Greek culture and language spread across many regions during and after his conquests.
+His empire brought different peoples and traditions into closer contact.
+Alexander continued campaigning for much of his short reign.
+He died in Babylon in 323 BCE at a young age.
+His generals later divided his empire among competing successor kingdoms.
+His life became the subject of many historical accounts and legends.`,
+characters:`Alexander was the Macedonian king at the center of the conquests. Philip II, his father, and the generals who later became his successors are important to his history.`,
+legacy:`Alexander's campaigns helped create the Hellenistic world, where Greek and local cultures interacted across a wide region.`
+},
+
+umar:{
+title:"Umar ibn al-Khattab",
+wiki:"https://en.wikipedia.org/wiki/Umar",
+text:`Umar ibn al-Khattab was an important early Muslim leader and the second caliph.
+He became a close companion of Prophet Muhammad and later took a leading role in the Muslim community.
+His caliphate began in 634 CE after the death of Abu Bakr.
+During his rule, the Muslim state expanded into parts of the Byzantine and Sasanian territories.
+He is also remembered for developing systems of administration, public finance and provincial governance.
+Judicial and social institutions became more organized during his period of leadership.
+Later Muslim historians frequently presented him as a model of strong and accountable government.
+His historical legacy is especially important in discussions of early Islamic political history.`,
+characters:`Umar ibn al-Khattab is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Umar ibn al-Khattab remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+saladin:{
+title:"Saladin",
+wiki:"https://en.wikipedia.org/wiki/Saladin",
+text:`Saladin, known in Arabic as Salah al-Din Yusuf ibn Ayyub, was a Muslim ruler of the twelfth century.
+He became the founder of the Ayyubid dynasty and united important territories in Egypt and Syria.
+He is best known for his conflict with Crusader states during the Third Crusade.
+In 1187, his forces defeated a major Crusader army at the Battle of Hattin.
+Jerusalem subsequently came under his control after negotiations and military pressure.
+Richard the Lionheart became his major opponent during the Third Crusade.
+Although their forces fought, diplomacy and agreements were also important parts of the conflict.
+Saladin became a lasting historical figure in both Muslim and European traditions.`,
+characters:`Saladin is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Saladin remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+harun:{
+title:"Harun al-Rashid",
+wiki:"https://en.wikipedia.org/wiki/Harun_al-Rashid",
+text:`Harun al-Rashid was an Abbasid caliph whose reign lasted from 786 to 809.
+His rule is strongly associated with Baghdad, which was an important political and intellectual center.
+The Abbasid state connected regions across the Middle East and wider Islamic world.
+Trade, scholarship and literature developed in the broader cultural environment of the period.
+Harun's court later became famous in literature, especially through stories associated with the Thousand and One Nights.
+Historical sources also record military campaigns and diplomatic relationships during his reign.
+His sons later became involved in a major succession struggle that affected the Abbasid state.
+Harun remains one of the best-known Abbasid rulers in popular and academic history.`,
+characters:`Harun al-Rashid is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Harun al-Rashid remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+tariq:{
+title:"Tariq ibn Ziyad",
+wiki:"https://en.wikipedia.org/wiki/Tariq_ibn_Ziyad",
+text:`Tariq ibn Ziyad was a military commander associated with the beginning of the Muslim conquest of Visigothic Hispania.
+He crossed from North Africa into the Iberian Peninsula in 711 CE.
+His forces defeated King Roderic's army at the Battle of Guadalete according to traditional accounts.
+Muslim forces then moved rapidly through parts of the peninsula.
+The conquest eventually led to the establishment of Muslim-ruled territories in Iberia.
+The region later developed into a diverse center of agriculture, scholarship and urban life.
+Accounts of Tariq's campaign vary in detail, and later traditions contain legendary elements.
+His name remains closely connected with the early history of al-Andalus.`,
+characters:`Tariq ibn Ziyad is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Tariq ibn Ziyad remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+mehmed:{
+title:"Mehmed II",
+wiki:"https://en.wikipedia.org/wiki/Mehmed_II",
+text:`Mehmed II was an Ottoman sultan who ruled in the fifteenth century.
+He is famous for conquering Constantinople in 1453 when he was still a young ruler.
+The conquest ended the Byzantine Empire as a political state.
+Mehmed developed Constantinople, later known as Istanbul, into an important Ottoman capital.
+His government supported administration, architecture and the movement of different communities into the city.
+He also continued Ottoman expansion in southeastern Europe and Anatolia.
+His reign strengthened the Ottoman state as a major regional power.
+Mehmed II is therefore remembered as one of the most important Ottoman sultans.`,
+characters:`Mehmed II is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Mehmed II remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+babur:{
+title:"Babur",
+wiki:"https://en.wikipedia.org/wiki/Babur",
+text:`Babur was a Central Asian ruler descended from Timur and Genghis Khan through different family lines.
+He struggled for control of territories in Central Asia before turning his attention toward northern India.
+In 1526, he defeated Ibrahim Lodi at the First Battle of Panipat.
+This victory helped establish the Mughal Empire in the Indian subcontinent.
+Babur wrote memoirs known as the Baburnama, an important source for his life and times.
+He described politics, landscapes, gardens and people he encountered.
+His successors expanded the empire far beyond the territories he initially controlled.
+Babur is remembered as the founder of the Mughal dynasty in India.`,
+characters:`Babur is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Babur remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+akbar:{
+title:"Akbar the Great",
+wiki:"https://en.wikipedia.org/wiki/Akbar",
+text:`Akbar was the third Mughal emperor and ruled from 1556 to 1605.
+He inherited a developing empire and greatly expanded its territory.
+Akbar strengthened central administration and organized systems for taxation and military service.
+He also developed relationships with different religious and cultural communities.
+His court became associated with art, literature, architecture and intellectual discussion.
+Important buildings and institutions were developed during his reign.
+Akbar's policies have been interpreted in different ways by historians.
+His long reign helped make the Mughal Empire one of the major powers of early modern South Asia.`,
+characters:`Akbar the Great is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Akbar the Great remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+shahjahan:{
+title:"Shah Jahan",
+wiki:"https://en.wikipedia.org/wiki/Shah_Jahan",
+text:`Shah Jahan was a Mughal emperor who ruled from 1628 to 1658.
+His reign is especially famous for architecture and imperial building projects.
+The Taj Mahal at Agra was commissioned during his reign as a mausoleum for Mumtaz Mahal.
+He also developed the Red Fort and other major Mughal structures.
+The Mughal court during this period displayed considerable wealth and artistic activity.
+Shah Jahan continued military campaigns and territorial policies inherited from earlier rulers.
+Later in his reign, a succession struggle among his sons changed the direction of the empire.
+His architectural legacy remains one of the most recognizable parts of Mughal history.`,
+characters:`Shah Jahan is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Shah Jahan remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+suleiman:{
+title:"Suleiman the Magnificent",
+wiki:"https://en.wikipedia.org/wiki/Suleiman_the_Magnificent",
+text:`Suleiman the Magnificent was an Ottoman sultan who ruled from 1520 to 1566.
+During his reign, the Ottoman Empire reached a major period of political and military power.
+His forces campaigned in central Europe, the Mediterranean and the Middle East.
+Suleiman was also associated with legal reforms and the organization of imperial administration.
+He supported architecture, poetry and other forms of culture.
+The architect Mimar Sinan created several famous buildings during the Ottoman period.
+Suleiman's reign connected military expansion with legal and cultural development.
+He remains one of the most famous rulers of the Ottoman Empire.`,
+characters:`Suleiman the Magnificent is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Suleiman the Magnificent remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+qin:{
+title:"Qin Shi Huang",
+wiki:"https://en.wikipedia.org/wiki/Qin_Shi_Huang",
+text:`Qin Shi Huang was the ruler who unified the major Chinese states in 221 BCE.
+He became the first emperor of a unified imperial China.
+His government centralized authority and introduced common standards in writing, currency and measurements.
+Large construction projects were carried out under Qin rule.
+The Terracotta Army is associated with his enormous imperial mausoleum complex.
+The Qin state also used strict laws and centralized administration.
+The dynasty itself was short-lived after his death, but many of its institutions influenced later Chinese governments.
+Qin Shi Huang is a central figure in the formation of imperial Chinese history.`,
+characters:`Qin Shi Huang is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Qin Shi Huang remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+cleopatra:{
+title:"Cleopatra",
+wiki:"https://en.wikipedia.org/wiki/Cleopatra",
+text:`Cleopatra VII was the last active ruler of the Ptolemaic Kingdom of Egypt.
+She became queen during a period of political competition within the dynasty.
+Cleopatra developed political alliances with Julius Caesar and later Mark Antony.
+Her relationship with Rome was closely connected to Egypt's struggle to preserve its independence.
+She was known for her education and ability to communicate with different peoples and cultures.
+Conflict between Mark Antony and Octavian eventually brought Roman forces into Egypt.
+After the defeat of Antony and Cleopatra, Egypt became a Roman province.
+Cleopatra's life has remained one of the most studied and dramatized stories of the ancient Mediterranean.`,
+characters:`Cleopatra is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Cleopatra remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+caesar:{
+title:"Julius Caesar",
+wiki:"https://en.wikipedia.org/wiki/Julius_Caesar",
+text:`Julius Caesar was a Roman general and statesman who played a decisive role in the fall of the Roman Republic.
+He gained fame through his campaigns in Gaul and became one of Rome's most powerful leaders.
+His crossing of the Rubicon River in 49 BCE began a civil war against his political opponents.
+Caesar emerged victorious and became dictator of Rome.
+He introduced political and calendar reforms during his period of power.
+His growing authority worried members of the Roman Senate.
+Caesar was assassinated in 44 BCE by a group of senators.
+His death led to further civil wars and eventually helped create the Roman Empire.`,
+characters:`Julius Caesar is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Julius Caesar remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+augustus:{
+title:"Augustus",
+wiki:"https://en.wikipedia.org/wiki/Augustus",
+text:`Augustus was the first Roman emperor and ruled from 27 BCE until 14 CE.
+He was originally known as Octavian and became the adopted heir of Julius Caesar.
+After years of civil war, he defeated Mark Antony and Cleopatra at the Battle of Actium.
+Augustus then reorganized Roman government while maintaining the appearance of republican institutions.
+His reign began a long period of relative stability often called the Pax Romana.
+Public buildings, roads and administrative systems were developed under his government.
+He also shaped Roman political culture through careful use of titles and propaganda.
+Augustus became a model for later Roman emperors.`,
+characters:`Augustus is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Augustus remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+charlemagne:{
+title:"Charlemagne",
+wiki:"https://en.wikipedia.org/wiki/Charlemagne",
+text:`Charlemagne was king of the Franks and later became emperor in western Europe.
+He expanded Frankish power across large parts of western and central Europe.
+In 800, Pope Leo III crowned him emperor in Rome.
+His government relied on local officials, royal representatives and religious institutions.
+His reign is associated with educational and cultural activity sometimes called the Carolingian Renaissance.
+Monasteries played an important role in preserving and copying texts.
+After his death, his empire was divided among his descendants through later agreements.
+Charlemagne remains a major figure in medieval European history.`,
+characters:`Charlemagne is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Charlemagne remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+mansa:{
+title:"Mansa Musa",
+wiki:"https://en.wikipedia.org/wiki/Mansa_Musa",
+text:`Mansa Musa was a ruler of the Mali Empire in West Africa during the fourteenth century.
+He is famous for the enormous pilgrimage he made to Mecca.
+Accounts of the journey describe the wealth displayed by his large traveling court.
+The Mali Empire controlled important gold-producing and trade regions.
+Cities such as Timbuktu and Gao became important centers within the wider region.
+Mansa Musa is also associated with building projects and support for Islamic scholarship.
+Later maps and written accounts helped spread stories of Mali's wealth across the Mediterranean world.
+He remains one of the best-known rulers in African medieval history.`,
+characters:`Mansa Musa is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Mansa Musa remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+joan:{
+title:"Joan of Arc",
+wiki:"https://en.wikipedia.org/wiki/Joan_of_Arc",
+text:`Joan of Arc was a French historical figure who became prominent during the Hundred Years' War.
+She said she received religious visions that inspired her to support the French cause.
+She gained access to the court of Charles VII and became associated with the relief of Orléans in 1429.
+Her presence helped raise French morale during an important stage of the conflict.
+She was later captured by forces allied with the English.
+Joan was tried and executed in 1431.
+Years later, a new investigation overturned the earlier conviction.
+She became a lasting symbol in French history and was later canonized as a saint.`,
+characters:`Joan of Arc is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Joan of Arc remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+napoleon:{
+title:"Napoleon Bonaparte",
+wiki:"https://en.wikipedia.org/wiki/Napoleon",
+text:`Napoleon Bonaparte rose to power during the political upheaval that followed the French Revolution.
+He became a successful military commander and eventually took control of the French government.
+In 1804, he became emperor of the French.
+His armies conquered or influenced large parts of continental Europe.
+The Napoleonic Code became an important legal influence in many places.
+His invasion of Russia in 1812 ended in a disastrous retreat.
+After a final defeat at Waterloo in 1815, he was exiled to Saint Helena.
+Napoleon's wars changed European borders, politics and military organization.`,
+characters:`Napoleon Bonaparte is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Napoleon Bonaparte remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+washington:{
+title:"George Washington",
+wiki:"https://en.wikipedia.org/wiki/George_Washington",
+text:`George Washington was a leading American military commander during the Revolutionary War.
+He served as commander in chief of the Continental Army against Britain.
+After the war, he became the first president of the United States.
+His presidency helped establish important precedents for the new federal government.
+Washington supported the creation of stable national institutions.
+He also warned about political divisions and excessive attachment to factions.
+After two presidential terms, he voluntarily left office.
+His role in the Revolution and early republic made him a central figure in U.S. history.`,
+characters:`George Washington is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`George Washington remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+lincoln:{
+title:"Abraham Lincoln",
+wiki:"https://en.wikipedia.org/wiki/Abraham_Lincoln",
+text:`Abraham Lincoln became the 16th president of the United States in 1861.
+His presidency began as the country entered the American Civil War.
+He worked to preserve the Union while the conflict developed.
+The Emancipation Proclamation changed the legal status of many enslaved people in Confederate-held areas.
+Lincoln delivered the Gettysburg Address during the war.
+He supported constitutional measures that led toward the abolition of slavery.
+He was assassinated in April 1865 shortly after the war ended.
+Lincoln remains a major figure in American political and civil-rights history.`,
+characters:`Abraham Lincoln is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Abraham Lincoln remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+mandela:{
+title:"Nelson Mandela",
+wiki:"https://en.wikipedia.org/wiki/Nelson_Mandela",
+text:`Nelson Mandela was a South African political leader who opposed apartheid.
+He became involved in the African National Congress and spent many years imprisoned.
+His imprisonment made him an international symbol of resistance to apartheid.
+He was released in 1990 as negotiations toward a new political system progressed.
+Mandela and other leaders worked toward ending apartheid and establishing democratic elections.
+In 1994, he became South Africa's first Black president.
+His presidency emphasized national reconciliation and institution building.
+Mandela remains one of the most influential political figures of the twentieth century.`,
+characters:`Nelson Mandela is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Nelson Mandela remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+mlk:{
+title:"Martin Luther King Jr.",
+wiki:"https://en.wikipedia.org/wiki/Martin_Luther_King_Jr.",
+text:`Martin Luther King Jr. was a major American civil-rights leader.
+He advocated nonviolent protest against racial segregation and discrimination.
+King helped lead campaigns and marches that drew national attention to civil-rights issues.
+His speeches became influential parts of the movement for equal rights.
+The Civil Rights Act of 1964 and Voting Rights Act of 1965 were important achievements of the broader movement.
+King received the Nobel Peace Prize in 1964.
+He was assassinated in 1968 while supporting a campaign for workers' rights.
+His legacy continues to influence discussions of equality and nonviolent activism.`,
+characters:`Martin Luther King Jr. is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Martin Luther King Jr. remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+},
+
+gandhi:{
+title:"Mahatma Gandhi",
+wiki:"https://en.wikipedia.org/wiki/Mahatma_Gandhi",
+text:`Mahatma Gandhi was a leading figure in India's independence movement.
+He developed and promoted methods of nonviolent resistance and civil disobedience.
+His political work in South Africa influenced his later activism in India.
+In India, he became associated with campaigns against British colonial rule.
+The Salt March of 1930 became one of the best-known examples of his protest methods.
+Gandhi emphasized mass participation and nonviolent political action.
+India achieved independence in 1947, although Partition created a separate and deeply traumatic political settlement.
+Gandhi was assassinated in 1948 and remains a major figure in modern Indian history.`,
+characters:`Mahatma Gandhi is the central historical figure discussed in this section. The account focuses on major events, leadership, historical context and long-term influence.`,
+legacy:`Mahatma Gandhi remains an important subject of historical study, with different sources and historians sometimes emphasizing different parts of the story.`
+}
+
+};
+
+function openStory(key){
+    const s=stories[key];
+    if(!s)return;
+
+    document.getElementById("storyTitle").textContent=s.title;
+    document.getElementById("storyText").textContent=s.text;
+    document.getElementById("storyCharacters").textContent=s.characters;
+    document.getElementById("storyLegacy").textContent=s.legacy;
+    document.getElementById("storyWiki").href=s.wiki;
+
+    document.getElementById("storyPage").style.display="block";
+    document.body.style.overflow="hidden";
+}
+
+function closeStory(){
+    document.getElementById("storyPage").style.display="none";
+    document.body.style.overflow="";
+}
+
+function searchStories(){
+    const q=document.getElementById("search").value.toLowerCase().trim();
+    document.querySelectorAll(".card").forEach(card=>{
+        card.style.display=card.textContent.toLowerCase().includes(q)?"flex":"none";
+    });
+}
+
+document.getElementById("storyPage").addEventListener("click",function(e){
+    if(e.target===this)closeStory();
+});
+
+document.addEventListener("keydown",function(e){
+    if(e.key==="Escape")closeStory();
+});
+</script>
+
+</body>
+</html>
